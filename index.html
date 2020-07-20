@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Campus Placement Analysis for Jain University</title>
+
+<script src="index_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="index_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="index_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="index_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="index_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="index_files/navigation-1.1/tabsets.js"></script>
+<link href="index_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="index_files/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Campus Placement Analysis for Jain University</h1>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#introduction"><span class="toc-section-number">0.1</span> Introduction</a><ul>
+<li><a href="#overview"><span class="toc-section-number">0.1.1</span> Overview</a></li>
+<li><a href="#list-of-variables"><span class="toc-section-number">0.1.2</span> List of Variables</a></li>
+</ul></li>
+<li><a href="#exploratory-data-analysis"><span class="toc-section-number">0.2</span> Exploratory Data Analysis</a><ul>
+<li><a href="#influence-on-status"><span class="toc-section-number">0.2.1</span> Influence on Status</a></li>
+<li><a href="#influence-on-salary"><span class="toc-section-number">0.2.2</span> Influence on Salary</a></li>
+</ul></li>
+<li><a href="#conclusion"><span class="toc-section-number">0.3</span> Conclusion</a></li>
+</ul>
+</div>
+
+<div id="introduction" class="section level2 tabset">
+<h2><span class="header-section-number">0.1</span> Introduction</h2>
+<div id="overview" class="section level3">
+<h3><span class="header-section-number">0.1.1</span> Overview</h3>
+<p>The <a href="https://www.kaggle.com/benroshan/factors-affecting-campus-placement">dataset</a> consists of campus placement data for MBA Business Analytics students from Jain University in Bangalore, India. There are 215 observations and 15 variables Dataset has information on:</p>
+<ul>
+<li>placement status of the student</li>
+<li>salary offered to students who were placed</li>
+<li>MBA specialization and grade</li>
+<li>Record of previous employment</li>
+<li>specialization and grade for undergraduate, higher secondary, and secondary education</li>
+</ul>
+</div>
+<div id="list-of-variables" class="section level3">
+<h3><span class="header-section-number">0.1.2</span> List of Variables</h3>
+<ul>
+<li><code>sl_no</code>: Serial Number of the observations for each student</li>
+<li><code>gender</code>: Male = ‘M’; Female = ‘F’</li>
+<li><code>ssc_p</code>: Secondary Education percentage (10th grade)</li>
+<li><code>ssc_b</code>: Board of Education for Secondary (Central / Others)</li>
+<li><code>hsc_p</code>: Higher Secondary Education percentage (12th grade)</li>
+<li><code>hsc_b</code>: Board of Education for Higher Secondary (Central / Others)</li>
+<li><code>hsc_s</code>: Specialization in Higher Secondary Education (Commerce / Science / Other)</li>
+<li><code>degree_p</code>: Degree Percentage</li>
+<li><code>degree_t</code>: Under Graduation degree type (Field of education)</li>
+<li><code>workex</code>: Record of previous work experience (Yes / No)</li>
+<li><code>etest_p</code>: Employability test percentage (conducted by college)</li>
+<li><code>specialisation</code>: Post Graduation (MBA) specialization (Mkt&amp;Fn / Mkt &amp;HR)</li>
+<li><code>mba_p</code>: MBA percentage</li>
+<li><code>status</code>: Status of placement (Placed / Not Placed)</li>
+<li><code>salary</code>: Annual salary offered by corporate to candidates who were placed</li>
+</ul>
+</div>
+</div>
+<div id="exploratory-data-analysis" class="section level2 tabset">
+<h2><span class="header-section-number">0.2</span> Exploratory Data Analysis</h2>
+<p>The exploratory data analysis is divided into two sections. First, the relationship between <code>status</code> and all the relevant dependent variables, excluding <code>sl_no</code> and <code>salary</code>, are examined. In the second section, the influence on <code>salary</code> is inspected.</p>
+<p> </p>
+<div id="influence-on-status" class="section level3">
+<h3><span class="header-section-number">0.2.1</span> Influence on Status</h3>
+<p> </p>
+<div id="what-is-the-placement-rate" class="section level4">
+<h4><span class="header-section-number">0.2.1.1</span> What is the placement rate?</h4>
+<div class="figure">
+<img src="index_files/figure-html/unnamed-chunk-1-1.png" alt="Student Campus Placement Rates" width="50%" />
+<p class="caption">
+Student Campus Placement Rates
+</p>
+</div>
+<pre class="r"><code>prop.table(table(placement$status)) * 100</code></pre>
+<pre><code>## 
+## Not Placed     Placed 
+##   31.16279   68.83721</code></pre>
+<p> </p>
+<p><strong>Remark:</strong> Approximately 69% students were hired and 31% were not.</p>
+<p> </p>
+</div>
+<div id="what-is-the-status-by-work-experience" class="section level4">
+<h4><span class="header-section-number">0.2.1.2</span> What is the status by work experience?</h4>
+<p>Hypothesis is that candidates with previous work experience are likely to get hired.</p>
+<p> </p>
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-3-2.png" width="50%" /></p>
+<p> </p>
+<p><strong>Remark:</strong> The bar plot on the left shows that more students did not have work experience. The proportion bar plot on the right shows that almost 60% of students without work experience were placed, whereas the placement rate for students with work experience is almost 90%. This result matches with the hypothesis.</p>
+<p> </p>
+</div>
+<div id="what-is-the-status-by-employment-test-score" class="section level4">
+<h4><span class="header-section-number">0.2.1.3</span> What is the status by employment test score?</h4>
+<p>The employment test was conducted by the college. Hypothesis is that this test score positively influences the placement decision.</p>
+<p> </p>
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-4-2.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-4-3.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-4-4.png" width="50%" /></p>
+<p> </p>
+<p><strong>Remark:</strong> The histogram and density plots for employment test scores with respect to status shows that, in general, for higher test scores, a greater percentage of students were placed than not placed.</p>
+<p>The boxplot shows the test score for students who were not placed in the interquartile range 60-76 (median = 67), and for those placed in the interquartile range 60-85 (median = 72). Therefore, it is certain that students with high employment test scores were preferred for placement, but those with scores 60-76 who were also placed, there must be other factors that influenced it.</p>
+<p> </p>
+</div>
+<div id="how-does-the-status-depend-on-both-employement-test-and-work-experience" class="section level4">
+<h4><span class="header-section-number">0.2.1.4</span> How does the status depend on both employement test and work experience?</h4>
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-5-2.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-5-3.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-5-4.png" width="50%" /></p>
+<p> </p>
+<p><strong>Remark:</strong> From the histogram plots it is clear that a very small percentage of students with previous work experience were not placed, and more among these students had low employment test score than high. However, for the students who were placed, <code>etest_p</code> scores does not seem to have any effect on the placement decision.</p>
+<p>Notice the comparision between the density and box plots, specifically how clear the distinction is for the box plot.</p>
+<p>In the box plot, we see that among the students who were not placed, the median etest score for those with work exprience were lower than those without. Among the students who were placed, we see the opposite, but the interquartile range almost overlaps. Comparing the status and employment test scores for students without work experience, we see that the interquartile range overlaps.</p>
+<p> </p>
+</div>
+<div id="what-is-the-effect-of-mba-test-score-on-placement-status" class="section level4">
+<h4><span class="header-section-number">0.2.1.5</span> What is the effect of MBA test score on placement status?</h4>
+<p>Hypothesis is that there is positive correlation.</p>
+<p> </p>
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-6-2.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-6-3.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-6-4.png" width="50%" /></p>
+<p> </p>
+<p><strong>Remark:</strong> The plot shows the hypothesis to hold for the lowest and the highest mba_p scores, but for the scores in between the visual evidence is not strong. So we cannot correctly conclude that the hypothesis holds.</p>
+<p>Specifically, the density plot and box plot show the interquaritlie range for Placed category (57-66) is wider and overlaps that of the Not Placed category (58-65). Distributions for both categories are skewed to the right. Median score for Placed is around 62 and median score for Not Placed is 61.</p>
+<p> </p>
+</div>
+<div id="did-the-mba-specialization-play-a-role-in-the-hiring-process" class="section level4">
+<h4><span class="header-section-number">0.2.1.6</span> Did the MBA specialization play a role in the hiring process?</h4>
+<p> </p>
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-7-2.png" width="50%" /></p>
+<p> </p>
+<p><strong>Remark:</strong> We see that more students specialized in Mkt&amp;Fin than Mkt&amp;HR. In addition, we see that a more candidates with Mkt&amp;Fin specialization were hired. Based on the proportion bar plot, the ratio of receiving placement for the two MBA streams is ~80% : ~55%.</p>
+<p> </p>
+</div>
+<div id="what-is-the-effect-of-undergraduate-degree-stream" class="section level4">
+<h4><span class="header-section-number">0.2.1.7</span> What is the effect of undergraduate degree stream?</h4>
+<p> </p>
+<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-8-2.png" width="50%" /></p>
+<p> </p>
+<p><strong>Remark:</strong> The first bar plot shows that the number of students in Comm&amp;Mgmt are a lot more than Sci&amp;Tech and other streams combined. But from the proportion bar plot We see that equal proportion of students from Comm&amp;Mgmt and Sci&amp;Tech were hired. And less than 50% of students from other streams were hired.</p>
+<p> </p>
+</div>
+<div id="how-does-both-undergraduate-degree-stream-and-degree-test-score-reflect-on-status" class="section level4">
+<h4><span class="header-section-number">0.2.1.8</span> How does both undergraduate degree stream and degree test score reflect on status?</h4>
+<p> </p>
+<p><img src="index_files/figure-html/unnamed-chunk-9-1.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-9-2.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-9-3.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-9-4.png" width="50%" /></p>
+<p> </p>
+<p><strong>Remark:</strong> According to the histograms and the density plot, across all streams, candidates with higher degree percentage were preferred. From the box plot it is noticed that for the other streams, the preferene for higher degree test is not as evident. <em>Note that when it comes to test scores the outliers in the box plot are not relevant.</em></p>
+<p> </p>
+<p><strong><em>Thus far the visual analysis suggests that test scores from all secondary and post-secondary levels were taken into account when deciding which student/candidate to hire.</em></strong></p>
+<p><strong><em>Now let us explore these test scores with respect to the MBA specializations and if one group fared better than the other in terms of their work experience.</em></strong></p>
+<p> </p>
+</div>
+<div id="how-does-the-mba-score-vary-over-different-specializations" class="section level4">
+<h4><span class="header-section-number">0.2.1.9</span> How does the MBA score vary over different specializations?</h4>
+<p> </p>
+<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-10-2.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-10-3.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-10-4.png" width="50%" /></p>
+<p> </p>
+<p><strong>Remark:</strong> The trend between MBA test scores and specializations is not clear from the histograms. But the density and box plots show that more students specializing Mkt&amp;HR had lower scores and more students specializingin Mkt&amp;Fin had higher scores. We also see from the boxplot that students in Mkt&amp;Fin had a higher median score than those in Mkt&amp;HR. Median score for Mkt&amp;Fin students is around 63, and that for Mkt&amp;HR students is around 61. For the second group, the distribution is skewed to the right.</p>
+<p> </p>
+</div>
+<div id="how-does-the-employement-test-score-vary-for-mba-students-based-on-their-specialization" class="section level4">
+<h4><span class="header-section-number">0.2.1.10</span> How does the employement test score vary for MBA students based on their specialization?</h4>
+<p> </p>
+<p><img src="index_files/figure-html/unnamed-chunk-11-1.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-11-2.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-11-3.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-11-4.png" width="50%" /></p>
+<p> </p>
+<p><strong>Remark:</strong> Based on the density curve and box plot, we see that employement test scores for students in Mkt&amp;Fin is more uniformly distributed, with a median score of 75. For Mkt&amp;HR students, the test scores are skewed to the right, with a median score of 67.</p>
+<p> </p>
+</div>
+<div id="what-is-the-degree-test-score-for-students-according-to-their-mba-specialization" class="section level4">
+<h4><span class="header-section-number">0.2.1.11</span> What is the degree test score for students according to their MBA specialization?</h4>
+<p> </p>
+<p><img src="index_files/figure-html/unnamed-chunk-12-1.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-12-2.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-12-3.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-12-4.png" width="50%" /></p>
+<p> </p>
+<p><strong>Remark:</strong> The histogram and density plots show that more students with Mkt&amp;HR had lower degree scores, and more students specializing in Mkt&amp;Fin scored higher. Based on the box plot, median degree test score for Mkt&amp;Fin is 67 and that for Mkt&amp;HR is 65. Even though the median scores for both specializations are almost the same, the scores for Mkt&amp;Fin are skewed right and those for Mkt&amp;HR are skewed left. Which means, more Mkt&amp;Fin students scored in the second quartile (64 - 67), and more Mkt&amp;HR students scored in the third quartile (65 - 69).</p>
+<p> </p>
+</div>
+<div id="what-is-the-higher-secondary-test-score-for-students-according-to-their-mba-specialization" class="section level4">
+<h4><span class="header-section-number">0.2.1.12</span> What is the higher secondary test score for students according to their MBA specialization?</h4>
+<p> </p>
+<p><img src="index_files/figure-html/unnamed-chunk-13-1.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-13-2.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-13-3.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-13-4.png" width="50%" /></p>
+<p> </p>
+<p><strong>Remark:</strong> Based on the density curve and box plot we see that the interquartile range for Mkt&amp;Fin is 62-77, with a median around 67. For Mkt&amp;HR the interquartile range is 57-70. and the median score is 63. The plots also show that test score distributions for both groups are slightly skewed right.</p>
+<p> </p>
+</div>
+<div id="what-is-the-secondary-test-score-for-students-according-to-their-mba-specialization" class="section level4">
+<h4><span class="header-section-number">0.2.1.13</span> What is the secondary test score for students according to their MBA specialization?</h4>
+<p> </p>
+<p><img src="index_files/figure-html/unnamed-chunk-14-1.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-14-2.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-14-3.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-14-4.png" width="50%" /></p>
+<p> </p>
+<p><strong>Remark:</strong> The density curve and box plot show that the ssc test score distribution for Mkt&amp;Fin students are skewed left, with a median of 69. And the ssc test score distribution for Mkt&amp;HR students are almost symmetrical, with a median of 65.</p>
+<p> </p>
+</div>
+<div id="is-there-a-connection-between-mba-stream-and-work-experience" class="section level4">
+<h4><span class="header-section-number">0.2.1.14</span> Is there a connection between MBA stream and work experience?</h4>
+<p> </p>
+<p><img src="index_files/figure-html/unnamed-chunk-15-1.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-15-2.png" width="50%" /></p>
+<p> </p>
+<p><strong>Remark:</strong> The bar graph on the left shows there are more students specializing in Mkt&amp;Fin than in Mkt&amp;HR. From the proportion bar graph on the right we see that more students in Mkt&amp;Fin with work experience than those in the Mkt&amp;HR specialization.</p>
+<p> </p>
+</div>
+<div id="is-there-a-connection-between-mba-test-score-and-work-experience" class="section level4">
+<h4><span class="header-section-number">0.2.1.15</span> Is there a connection between MBA test score and work experience?</h4>
+<p> </p>
+<p><img src="index_files/figure-html/unnamed-chunk-16-1.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-16-2.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-16-3.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-16-4.png" width="50%" /></p>
+<p> </p>
+<p><strong>Remark:</strong> Students with work exprience generally have higher MBA score. From the density plot and box plot we see that test scores for students without job experience is skewed right, and test scores for students with work experience is symmetric. The median test score for students with work experience is around 64. The median test score for students without work experience is around 61.</p>
+<p> </p>
+<p><strong><em>We previously found that more students specializing in Mkt&amp;Fin were hired than those in Mkt&amp;HR. Based on the analysis of the test scores and work experiences of students with respect to their MBA specialization, we found that more students from Mkt&amp;Fin had work experience and higher secondar and post-secondary test scores than those in Mkt&amp;HR. </em></strong></p>
+<p><strong><em>Next, it is reasonable to wonder if gender played any role in the hiring process.</em></strong></p>
+<p> </p>
+</div>
+<div id="did-gender-play-a-role-in-the-hiring-process" class="section level4">
+<h4><span class="header-section-number">0.2.1.16</span> Did gender play a role in the hiring process?</h4>
+<p><img src="index_files/figure-html/unnamed-chunk-17-1.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-17-2.png" width="50%" /></p>
+<p> </p>
+<p><strong>Remark:</strong> The first bar plot on the left shows that there are less female stuents than male. The proportion bar plot on the right shows that around 60% of female students were placed and around 70% of male students were placed. At this point it is not evident if gender played a role in the placement process.</p>
+<p> </p>
+</div>
+<div id="what-is-the-work-experience-according-to-the-gender" class="section level4">
+<h4><span class="header-section-number">0.2.1.17</span> What is the work experience according to the gender?</h4>
+<p> </p>
+<p><img src="index_files/figure-html/unnamed-chunk-18-1.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-18-2.png" width="50%" /></p>
+<p> </p>
+<p><strong>Remark:</strong> The proportion bar plot on the left shows that there are more male students with work experience than female.</p>
+<p>From the proportion bar plot on the right we see that among those students with work experience, around 70% are male and 30% are female. In case of those students without work experience, around 62% are male and 38% are female.</p>
+<p> </p>
+</div>
+<div id="is-there-a-preference-for-mba-specialization-according-to-gender" class="section level4">
+<h4><span class="header-section-number">0.2.1.18</span> Is there a preference for MBA specialization according to gender?</h4>
+<p> </p>
+<p><img src="index_files/figure-html/unnamed-chunk-19-1.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-19-2.png" width="50%" /></p>
+<p> </p>
+<p><strong>Remark:</strong> The proportion bar plot on the right shows that more female students specialized in Mkt&amp;HR and more male students specialized in Mkt&amp;Fin.</p>
+<p> </p>
+</div>
+<div id="how-did-students-from-each-gender-perform-on-the-mba-test" class="section level4">
+<h4><span class="header-section-number">0.2.1.19</span> How did students from each gender perform on the MBA test?</h4>
+<p> </p>
+<p><img src="index_files/figure-html/unnamed-chunk-20-1.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-20-2.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-20-3.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-20-4.png" width="50%" /></p>
+<p> </p>
+<p><strong>Remark:</strong> From the overlayed histogram, density plot, and box plot we see that MBA test scores for male students are skewed to the right, and the scores for the female students is skewed slightly to the left (almost symmetrical). The median score for female students is almost 65 and that for male students is 61. The box plot also shows some extremely high scores for male students as outliers from the trend observed. Therefore, it can be concluded that more female students performed better in the MBA test.</p>
+<p> </p>
+</div>
+<div id="how-did-students-from-each-gender-perform-on-the-employment-test" class="section level4">
+<h4><span class="header-section-number">0.2.1.20</span> How did students from each gender perform on the employment test?</h4>
+<p> </p>
+<p><img src="index_files/figure-html/unnamed-chunk-21-1.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-21-2.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-21-3.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-21-4.png" width="50%" /></p>
+<p> </p>
+<p><strong>Remark:</strong> The density curves for employement test scores for both genders show multimodal distribution of the data. The blue density curve have two peaks, one around 60 and one around 85. The pink density curve have two peaks around 58 and 90, and a small plateau around 70. The prominent peaks for both curves overlap around the same regions, where the peaks around the lower scores (58 and 60) have higher density, and the peaks around the higher scores (85 and 90) have lower density. This corresponds to the possibility that students with work experience performed better at the employment test. The lower density for the higher scores is in agreement with the finding that fewer students have previous work experience. According to the box plot, median score for female students is around 69 and that for male students is around 72.</p>
+<p>Therefore, it can be concluded that more male students performed better in the employment test.</p>
+<p> </p>
+</div>
+<div id="how-did-students-from-each-gender-perform-on-the-degree-test" class="section level4">
+<h4><span class="header-section-number">0.2.1.21</span> How did students from each gender perform on the degree test?</h4>
+<p> </p>
+<p><img src="index_files/figure-html/unnamed-chunk-22-1.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-22-2.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-22-3.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-22-4.png" width="50%" /></p>
+<p> </p>
+<p><strong>Remark:</strong> The density curves and box plot show that the degree test score distribution for male and female students is slightly skewed to the right. Median score for female students is around 67, and median score for male students is 65. It can be concluded that more female students performed better in the degree test.</p>
+<p> </p>
+<p><strong><em>Visual analysis of the test scores based on gender shows that for the most part female students performed better in the academic tests. Male students performed better in the employment test because of a larger number of male students than female had work experience.</em></strong></p>
+<p> </p>
+</div>
+</div>
+<div id="influence-on-salary" class="section level3">
+<h3><span class="header-section-number">0.2.2</span> Influence on Salary</h3>
+<p> </p>
+<div id="what-is-the-numeric-range-of-the-salaries-offered" class="section level4">
+<h4><span class="header-section-number">0.2.2.1</span> What is the numeric range of the salaries offered?</h4>
+<p> </p>
+<p><img src="index_files/figure-html/unnamed-chunk-23-1.png" width="50%" /></p>
+<p> </p>
+<p><strong>Remark:</strong> The salary offered ranges from roughly Rs.200,000 to Rs.950,000. And the median salary is around Rs.265,000.</p>
+<p> </p>
+</div>
+<div id="how-does-the-salary-for-hired-students-vary-based-on-their-gender" class="section level4">
+<h4><span class="header-section-number">0.2.2.2</span> How does the salary for hired students vary based on their gender?</h4>
+<p> </p>
+<p><img src="index_files/figure-html/unnamed-chunk-24-1.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-24-2.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-24-3.png" width="50%" /></p>
+<p> </p>
+<p><strong>Remark:</strong> From all three plots we see that the salaries for both genders are skewed right, similar to the overal salary distribution. We see that the lowest salary offered to both genders were Rs.200,000. For female students the median salary is around Rs.250,000 and the interquatile range is Rs.220,000 - Rs.300,000. For male students the median salary is Rs.275,000 and the interquartile range is Rs.225,000 - Rs.300,000. In the box plot we see outliers in the form of salary offered to a single female student at Rs.650,000. For male students, we see an extremely large number of salary beyond fourth quartile in the range from Rs.375,000 - Rs.925,000.</p>
+<p> </p>
+</div>
+<div id="how-does-the-salary-for-hired-students-vary-based-on-their-mba-specialization" class="section level4">
+<h4><span class="header-section-number">0.2.2.3</span> How does the salary for hired students vary based on their MBA specialization?</h4>
+<p> </p>
+<p><img src="index_files/figure-html/unnamed-chunk-25-1.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-25-2.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-25-3.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-25-4.png" width="50%" /></p>
+<p> </p>
+<p><strong>Remark:</strong> Based on the overlayed histogram and box plot we see that the median salary offered to placed students from Mkt&amp;Fin are higher than that of Mkt&amp;HR. We also see that really high salaries in the range Rs.500,000 - Rs.950,000 were offered to students in Mkt&amp;Fin. Highest salary offered to students placed in Mkt&amp;HR is approximately Rs.460,000.</p>
+<p> </p>
+</div>
+<div id="did-students-with-work-experience-receive-higher-salary" class="section level4">
+<h4><span class="header-section-number">0.2.2.4</span> Did students with work experience receive higher salary?</h4>
+<p> </p>
+<p><img src="index_files/figure-html/unnamed-chunk-26-1.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-26-2.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-26-3.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-26-4.png" width="50%" /></p>
+<p> </p>
+<p><strong>Remark:</strong> From the density plot we see that a similar proportion of stduents with and without work experience received salaries between Rs.200,000 - Rs.450,000. However, those in the salaries in the range of Rs.600,000 - Rs.800,000 were exclusively offered to those with work experience.</p>
+<p>Note that when we compare this density plot with that from comparison of salary based on MBA specialization (remark for salary vs specialization), we see that the students in the higher salary range are excluseively from Mkt&amp;Fin.</p>
+<p>Upon comparison with the graph for salary and gender (remark for salary vs gender), we see that both male and female students belong to that salary bracket.</p>
+<p> </p>
+</div>
+<div id="did-the-salary-depend-on-the-mba-test-score-how-did-work-experience-influence-it" class="section level4">
+<h4><span class="header-section-number">0.2.2.5</span> Did the salary depend on the MBA test score? How did work experience influence it?</h4>
+<p> </p>
+<p><img src="index_files/figure-html/unnamed-chunk-27-1.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-27-2.png" width="50%" /></p>
+<p> </p>
+<p><strong>Remark:</strong> From the scatter plot we see that regardless of the MBA test score, only students with work experience were offered salaries in the extremely high range. This implies that other factors are likely to have influenced this decision.</p>
+<p>From the box plot we see that among the students hired, the median MBA test score is higher for those with work experience. Students without work experience received a much lower salary. Maximum salary offered to students without work experience is a little under Rs.500,000.</p>
+<p> </p>
+</div>
+<div id="did-the-salary-depend-on-the-employment-test-score-how-did-work-experience-influence-it" class="section level4">
+<h4><span class="header-section-number">0.2.2.6</span> Did the salary depend on the employment test score? How did work experience influence it?</h4>
+<p> </p>
+<p><img src="index_files/figure-html/unnamed-chunk-28-1.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-28-2.png" width="50%" /></p>
+<p> </p>
+<p><strong>Remark:</strong> The scatter plot shows that the highest salaries were offered only to students who had work experience regardless of their empployment test score. This implies other factors are likely to have influenced this decision.</p>
+<p>From the box plot we see that among the students hired, the median empployment test score is slightly higher for those with work experience. Students without work experience received a much lower salary. Maximum salary offered to students without work experience is a little under Rs.500,000.</p>
+<p> </p>
+</div>
+<div id="did-the-salary-depend-on-the-undergraduate-degree-test-score-how-did-work-experience-influence-it" class="section level4">
+<h4><span class="header-section-number">0.2.2.7</span> Did the salary depend on the undergraduate degree test score? How did work experience influence it?</h4>
+<p> </p>
+<p><img src="index_files/figure-html/unnamed-chunk-29-1.png" width="50%" /><img src="index_files/figure-html/unnamed-chunk-29-2.png" width="50%" /></p>
+<p> </p>
+<p><strong>Remark:</strong> The scatter plot on the left shows for salaries less than Rs.500,000 an even distribution of salaries between students with and without work experience. Salaries larger than Rs.500,000 were offered specifically to students with work experience, regardless of their degree test score. It is reasonable to suggest that other factors have influenced this decision.</p>
+<p>From the box plot we see no significant difference in degree test scores based on the students’ work experience.However, students without work experience still received a much lower salary. Maximum salary offered to students without work experience is a little under Rs.500,000.</p>
+<p> </p>
+<p><strong><em>For the last three inspection of salary with respect to the five test scores we can see that there were always three students with work experience that received salaries above Rs.600,000. The following table shows the observations related to these three students.</em></strong></p>
+<p> </p>
+<pre class="r"><code>highsal &lt;- knitr::kable(placed %&gt;%
+               filter(salary &gt; 600000))
+highsal</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">sl_no</th>
+<th align="left">gender</th>
+<th align="right">ssc_p</th>
+<th align="left">ssc_b</th>
+<th align="right">hsc_p</th>
+<th align="left">hsc_b</th>
+<th align="left">hsc_s</th>
+<th align="right">degree_p</th>
+<th align="left">degree_t</th>
+<th align="left">workex</th>
+<th align="right">etest_p</th>
+<th align="left">specialisation</th>
+<th align="right">mba_p</th>
+<th align="left">status</th>
+<th align="right">salary</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">120</td>
+<td align="left">M</td>
+<td align="right">60.8</td>
+<td align="left">Central</td>
+<td align="right">68.40</td>
+<td align="left">Central</td>
+<td align="left">Commerce</td>
+<td align="right">64.6</td>
+<td align="left">Comm&amp;Mgmt</td>
+<td align="left">Yes</td>
+<td align="right">82.66</td>
+<td align="left">Mkt&amp;Fin</td>
+<td align="right">64.34</td>
+<td align="left">Placed</td>
+<td align="right">940000</td>
+</tr>
+<tr class="even">
+<td align="right">151</td>
+<td align="left">M</td>
+<td align="right">71.0</td>
+<td align="left">Central</td>
+<td align="right">58.66</td>
+<td align="left">Central</td>
+<td align="left">Science</td>
+<td align="right">58.0</td>
+<td align="left">Sci&amp;Tech</td>
+<td align="left">Yes</td>
+<td align="right">56.00</td>
+<td align="left">Mkt&amp;Fin</td>
+<td align="right">61.30</td>
+<td align="left">Placed</td>
+<td align="right">690000</td>
+</tr>
+<tr class="odd">
+<td align="right">178</td>
+<td align="left">F</td>
+<td align="right">73.0</td>
+<td align="left">Central</td>
+<td align="right">97.00</td>
+<td align="left">Others</td>
+<td align="left">Commerce</td>
+<td align="right">79.0</td>
+<td align="left">Comm&amp;Mgmt</td>
+<td align="left">Yes</td>
+<td align="right">89.00</td>
+<td align="left">Mkt&amp;Fin</td>
+<td align="right">70.81</td>
+<td align="left">Placed</td>
+<td align="right">650000</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+<p><strong>Remark:</strong> The table above lists the three students who were offered salary greater than Rs.600,000. We see that all three students had work experience and specialized in Mkt&amp;Fin. Two of them are male and one female. Two students from Commerce and one from Sci&amp;Tech. The test scores did not seem to have speicifically influenced the salaries as we see test scores in the approximate range of50-80.</p>
+<p> </p>
+</div>
+</div>
+</div>
+<div id="conclusion" class="section level2">
+<h2><span class="header-section-number">0.3</span> Conclusion</h2>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
